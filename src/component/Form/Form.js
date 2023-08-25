@@ -1,29 +1,28 @@
-import {useState} from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 
-export default function ActivityForm() {
-const [activity, setActivity] = useState("")
+export default function ActivityForm({ onAddActivity }) {
+  const [activity, setActivity] = useState("");
 
-    return (
-<>
-        <h3>Add new Activity:</h3>
-<form>
-        onAddActivity={(event) => {
-          event.preventDefault();
-          setActivity([...activity, { name: inputValue, checked, id: nanoid(6) }]);
-          // Clears input after form submit.
-          setInputValue("");
-        }}
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setActivity([...activity, { name: inputValue, checked, id: nanoid(6) }]);
+    setInputValue("");
+  };
+  onAddActivity();
 
-
+  return (
+    <>
+      <h3>Add new Activity:</h3>
+      <form>
         <label htmlFor="name">Name:</label>
-        <input type="text" id="name" onClick={} />
+        <input type="text" id="name" onChange={handleFormSubmit} />
 
         <label htmlFor="goodWeather">Good weather activity:</label>
-        <input type="checkbox" id="goodWeather" />
+        <input type="checkbox" id="goodWeather" onChange={handleFormSubmit} />
 
         <button type="submit">Submit</button>
- 
-  </form> 
-   </>)
+      </form>
+    </>
+  );
 }
