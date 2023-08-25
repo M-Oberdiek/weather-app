@@ -1,37 +1,30 @@
-
-import { nanoid } from "nanoid";
-import { useRef } from "react";
-
 export default function ActivityForm({ onAddActivity }) {
-
-  const handleFormSubmit = (event) => {
+  function handleFormSubmit(event) {
     event.preventDefault();
-    setActivity([...activity, { name: inputValue, checked, id: nanoid(6) }]);
-    setInputValue("");
-    
-  };
-  onAddActivity();
-
-  const App = () => {
-    const ref = useRef(null);
-
-  const handleClick = () => {
-    ref.current.focus();
-  };
+    //const formData = new FormData(event.target);
+    //const data = Object.fromEntries(formData);
+    const formElements = event.target.elements;
+    const data = {
+      name: formElements.name.value,
+      goodWeather: formElements.goodWeather.checked,
+    };
+    console.log(data);
+    onAddActivity(data);
+    event.target.reset();
+    formElements.name.focus();
+  }
 
   return (
     <>
       <h3>Add new Activity:</h3>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <label htmlFor="name">Name:</label>
-        <input ref={ref} type="text" id="name" onChange={handleFormSubmit} />
+        <input type="text" id="name" name="name" />
 
         <label htmlFor="goodWeather">Good weather activity:</label>
-        <input type="checkbox" id="goodWeather" onChange={handleFormSubmit} />
+        <input type="checkbox" id="goodWeather" name="goodWeather" />
 
-        <button type="submit" onClick={handleClick}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
