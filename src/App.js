@@ -2,7 +2,7 @@ import "./App.css";
 import ActivityForm from "./component/Form/Form.js";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
-import List from "./component/List/List.js";
+import List from "./component/LIST/List.js";
 
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
@@ -13,6 +13,7 @@ function App() {
   function handleAddActivity(newActivity) {
     setActivities([...activities, { id: uid(6), ...newActivity }]);
   }
+
   return (
     <>
       <List activities={activities} />
