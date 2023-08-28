@@ -21,7 +21,9 @@ export default function ActivityForm({ onAddActivity }) {
         <label htmlFor="goodWeather">Good weather activity:</label>
         <input type="checkbox" id="goodWeather" name="goodWeather" />
 
-        <button type="submit">Submit</button>
+        <button className="submitButton" type="submit">
+          Submit
+        </button>
       </form>
     </>
   );

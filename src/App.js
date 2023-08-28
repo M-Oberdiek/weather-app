@@ -23,7 +23,7 @@ function App() {
           "https://example-apis.vercel.app/api/weather/europe"
         );
         const data = await response.json();
-
+        console.log(data);
         setWeather(data);
       } catch (error) {
         console.error("Error fetching weather:", error);
@@ -36,14 +36,24 @@ function App() {
   }, []);
 
   const filteredActivities = activities.filter(
-    (activity) => activity.goodWeather === weather.isGoodWeather
+    (activity) => activity.goodWeather === weather?.isGoodWeather
   );
+
+  const handleDeleteActivity = (id) => {
+    setActivities(activities.filter((activity) => activity.id !== id));
+  };
 
   return (
     <>
+      <h2>
+        {weather
+          ? `${weather.condition} ${weather.temperature} °C`
+          : "Loading Weather..."}
+      </h2>
       <List
+        onDeleteActivity={handleDeleteActivity}
         activities={filteredActivities}
-        isGoodWeather={weather.isGoodWeather}
+        isGoodWeather={weather?.isGoodWeather}
       />
       <hr />
       <ActivityForm onAddActivity={handleAddActivity} />

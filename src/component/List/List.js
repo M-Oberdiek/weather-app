@@ -1,4 +1,9 @@
-export default function List({ activities, isGoodWeather }) {
+export default function List({ activities, isGoodWeather, onDeleteActivity }) {
+  const liStyle = {
+    backgroundImage: isGoodWeather
+      ? "linear-gradient(to right, white, yellow"
+      : "linear-gradient(to right, white, blue",
+  };
   return (
     <>
       <h3>
@@ -8,7 +13,18 @@ export default function List({ activities, isGoodWeather }) {
       </h3>
       <ul>
         {activities.map((activity) => {
-          return <li key={activity.id}>{activity.name}</li>;
+          return (
+            <li style={liStyle} key={activity.id}>
+              {activity.name}{" "}
+              <button
+                className="deleteButton"
+                type="button"
+                onClick={() => onDeleteActivity(activity.id)}
+              >
+                X
+              </button>
+            </li>
+          );
         })}
       </ul>
     </>
