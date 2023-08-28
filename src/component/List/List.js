@@ -1,8 +1,15 @@
-export default function List({ activities }) {
+export default function List({ activities, isGoodWeather }) {
   return (
     <>
+      <h3>
+        {isGoodWeather
+          ? "The weather is awesome! Go outside and:"
+          : "Bad weather outside! Here is what you can do now:"}
+      </h3>
       <ul>
-        <li key={activities.id}>{activities.name}</li>
+        {activities.map((activity) => {
+          return <li key={activity.id}>{activity.name}</li>;
+        })}
       </ul>
     </>
   );
